@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%= link_to "DCT Chat", root_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" <%= user_signed_in? ? "":"hidden" %>>
+        <%= link_to "Chatrooms", chatrooms_path, class: "nav-link #{current_page?(chatrooms_path) ? "active":""}"%>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle <%= current_page?(edit_user_registration_path) ? "active":"" %> href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= "#{material_icon.account_circle.md_18} #{current_user.name}".html_safe %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "#{material_icon.settings.md_18} Settings".html_safe, edit_user_registration_path, class: "dropdown-item"%>
+            <div class="dropdown-divider"></div>
+            <%= link_to "#{material_icon.exit_to_app.md_18} Sign-Out".html_safe, destroy_user_session_path, method: :delete , class: "dropdown-item"%>
+          </div>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "#{material_icon.person.md_18} Sign-in".html_safe, new_user_session_path, class: "nav-link #{current_page?(new_user_session_path) ? "active":""}"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "#{material_icon.person_add.md_18} Sign-Up".html_safe, new_user_registration_path, class: "nav-link #{current_page?(new_user_registration_path) ? "active":""}"%>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

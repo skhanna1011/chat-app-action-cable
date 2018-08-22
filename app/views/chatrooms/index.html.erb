@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h3>Chatrooms</h3>
+  <% if @chatrooms.any? %>
+    <ul class="list-group">
+      <%= render @chatrooms %>
+    </ul>
+  <% else %>
+    <p>Be the first one to make a chatroom!</p>
+  <% end %>
+  <%= form_for @chatroom do |f| %>
+  <%= f.label "Create new Chatroom:" %>
+  <%= f.text_field :topic, placeholder: "Enter Chatroom Topic", class:"form-control" %>
+  <%= f.button class:"btn btn-light" %>
+  <% end %>
+</div>
